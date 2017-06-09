@@ -32,6 +32,9 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
+        
         View view = inflater.inflate(R.layout.settings_fragment, container, false);
         mSeekBar = (SeekBar) view.findViewById(R.id.seekBar1);
         mSeekBar.setOnSeekBarChangeListener(this);
