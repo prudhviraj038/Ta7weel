@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/settings_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+
+            <TextView
+                android:text="App Behaviour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/settings_txt_color" />
+
+
+                <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                    android:gravity="center_vertical">
+
+
+                    <TextView
+                    android:text="Auto Update :"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+                <TextView
+                    android:text="1 Minute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="15dp"
+                    android:id="@+id/refresh_time_txt"
+                    android:layout_weight="1" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar1"
+                        android:layout_height="wrap_content"
+                        android:max="59"
+                        android:layout_width="120dp" />
+
+
+                </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:text="Shake to Convert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/settings_txt_color"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="15dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></LinearLayout>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/sb_shake"
+                    android:layout_height="wrap_content"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswBackMeasureRatio="1.4"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="2dp" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:text="Notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/settings_txt_color"
+                    android:paddingLeft="15dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></LinearLayout>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/sb_notify"
+                    android:layout_height="wrap_content"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswBackMeasureRatio="1.4"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="2dp" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Ta7weel App"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/settings_txt_color" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color">
+
+                <TextView
+                    android:text="Contact us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:text="About us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:text="Share Ta7weel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/settings_txt_color" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_whatsup_settings" />
+
+                <TextView
+                    android:text="WhatsApp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_fb_settings"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:text="Facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_twitter_settings"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:text="Twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_instagram_settings"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:text="Instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_email_settings"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:text="Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/settings_item_color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="30dp">
+
+                <ImageView
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_sms_settings"
+                    android:layout_width="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:text="SMS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/settings_txt_color" />
+
+
+            </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

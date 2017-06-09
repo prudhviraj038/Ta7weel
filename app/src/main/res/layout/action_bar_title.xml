@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:weightSum="1.0"
+    android:gravity="center_vertical|center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_logo"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="false"
+            android:adjustViewBounds="false"
+            android:layout_height="30dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:id="@+id/btn_menu"
+                android:adjustViewBounds="true"
+                android:padding="6dp"
+                android:src="@drawable/ic_menu" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"></LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/circular_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:indeterminate="false"
+                android:progress="1"
+                android:progressDrawable="@drawable/circular_progressbar"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:max="1440" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:id="@+id/btn_addnew"
+                android:src="@drawable/ic_add_new"
+                android:adjustViewBounds="true"
+                android:padding="2dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d2264</color>
+    <color name="colorPrimaryDark">#1d2264</color>
+    <color name="colorPrimaryLight">#aa303f9f</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorActionBackground">#FFFFFF</color>
+    <color name="recyclerview_background">#ebebeb</color>
+    <color name="settings_background">#ececec</color>
+    <color name="settings_txt_color">#1d2264</color>
+    <color name="settings_item_color">#ffffff</color>
+
+</resources>

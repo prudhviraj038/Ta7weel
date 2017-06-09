@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/copy_bg"
+        android:paddingTop="8dp"
+        android:gravity="center_horizontal"
+        android:divider="@drawable/copy_divider"
+        android:showDividers="middle">
+
+        <TextView
+            android:text="Cut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pop_cut"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:text="Copy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pop_copy"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:text="Paste"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pop_paste"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>
