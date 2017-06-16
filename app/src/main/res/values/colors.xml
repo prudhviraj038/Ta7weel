@@ -9,5 +9,8 @@
     <color name="settings_background">#ececec</color>
     <color name="settings_txt_color">#1d2264</color>
     <color name="settings_item_color">#ffffff</color>
+    <color name="table_row">#fdfbf0</color>
+    <color name="calc_buttons">#eaeaea</color>
+
 
 </resources>

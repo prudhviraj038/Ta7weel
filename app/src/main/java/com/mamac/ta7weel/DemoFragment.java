@@ -32,6 +32,7 @@ public class DemoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_demo, container, false);
         TextView textView = (TextView) view.findViewById(R.id.textView);
         textView.setText(String.valueOf(getArguments().getInt("someInt")));
+
         //setHasOptionsMenu(true);
 
         return view;

@@ -45,7 +45,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/currency_baserate"
             android:textSize="12sp"
-            android:textColor="@color/colorPrimaryLight" />
+            android:textColor="@color/colorPrimaryLight"
+            android:singleLine="true"
+            android:ellipsize="marquee" />
     </LinearLayout>
 
     <LinearLayout

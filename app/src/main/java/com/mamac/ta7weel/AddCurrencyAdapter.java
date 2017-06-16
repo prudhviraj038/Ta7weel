@@ -5,36 +5,37 @@ package com.mamac.ta7weel;
  */
 
 
-        import android.content.Context;
-        import android.content.pm.PackageInstaller;
-        import android.graphics.Color;
-        import android.support.v7.widget.RecyclerView;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import com.squareup.picasso.Picasso;
+import com.google.android.gms.ads.formats.NativeAd;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.squareup.picasso.Picasso;
 
-        import java.util.Collections;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Locale;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
-public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder> {
+public class AddCurrencyAdapter extends RecyclerView.Adapter<AddCurrencyAdapter.MyViewHolder> {
 
     public List<Rates> moviesList;
 
     public HashMap<Integer,Rates> dummyList;
 
     private Context context;
-    HomeFragment homeFragment;
+    AddCurrenciesFragment homeFragment;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
         public TextView title, base_rate, value,full_name;
-        public ImageView flag_id;
+        public ImageView flag_id,selected_tick;
         public Rates rates;
 
         public MyViewHolder(View view) {
@@ -45,6 +46,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder
             value = (TextView) view.findViewById(R.id.currency_converted_value);
             full_name = (TextView) view.findViewById(R.id.currency_full_form);
             flag_id = (ImageView) view.findViewById(R.id.currency_flag);
+            selected_tick = (ImageView)  view.findViewById(R.id.selcted_tick);
             view.setOnClickListener(this);
 
         }
@@ -60,24 +62,24 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder
         @Override
         public void onClick(View view) {
 
-            homeFragment.current_item=rates;
+            if(!AppController.getInstance().selected_channels.contains(moviesList.get(getAdapterPosition()).short_name)){
 
-            Collections.swap(moviesList,getAdapterPosition(),0);
-            notifyItemMoved(getAdapterPosition(),0);
-            homeFragment.recyclerView.scrollToPosition(getAdapterPosition());
+                AppController.getInstance().selected_channels.add(moviesList.get(getAdapterPosition()).short_name);
+                selected_tick.setVisibility(View.VISIBLE);
+            }else{
+                AppController.getInstance().selected_channels.remove(moviesList.get(getAdapterPosition()).short_name);
+                selected_tick.setVisibility(View.GONE);
 
-            homeFragment.set_current_item(rates,getAdapterPosition());
+            }
 
-            Log.e("pos2",""+getLayoutPosition());
 
-            Session.setCurrencyID(context,rates.short_name);
-
+            Log.e("selected",AppController.getInstance().selected_channels.toString());
 
         }
     }
 
 
-    public RatesAdapter(List<Rates> moviesList, Context context,HomeFragment homeFragment) {
+    public AddCurrencyAdapter(List<Rates> moviesList, Context context, AddCurrenciesFragment homeFragment) {
         this.moviesList = moviesList;
         this.context = context;
         this.homeFragment = homeFragment;
@@ -90,7 +92,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.rates_item, parent, false);
+                .inflate(R.layout.select_currency_item, parent, false);
 
 
 
@@ -100,26 +102,29 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        if(position<moviesList.size()){
             Rates rates = moviesList.get(position);
             holder.rates = rates;
 
             holder.title.setText(rates.short_name);
-            // 1 usd/rates.base_rate  * current =  short_name;
 
-            holder.base_rate.setText( "1 "+rates.short_name+" = " + format_decimals(1/(Float.parseFloat(rates.base_rate) )* Float.parseFloat(homeFragment.current_item.base_rate)) + " " + homeFragment.current_item.short_name);
+            holder.base_rate.setText(rates.base_rate);
 
-            holder.value.setText( rates.symbol +" "+ rates.value);
+            holder.value.setText(rates.value);
             holder.full_name.setText(rates.long_name);
+
             //  holder.flag_id.setImageResource(rates.flag_id);
 
             Picasso.with(context).load(rates.image).into(holder.flag_id);
 
+        if(AppController.getInstance().selected_channels.contains(moviesList.get(position).short_name)){
+
+            holder.selected_tick.setVisibility(View.VISIBLE);
         }else{
-
-
-
+            holder.selected_tick.setVisibility(View.GONE);
         }
+
+
+
 
     }
 
@@ -130,12 +135,4 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.MyViewHolder
 
     }
 
-
-
-    private String format_decimals(Float value){
-
-        return String.format(Locale.ENGLISH,"%.4f",value);
-
-    }
-
-    }
+}

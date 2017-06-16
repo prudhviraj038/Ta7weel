@@ -53,12 +53,16 @@ import org.mozilla.javascript.Scriptable;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import static com.mamac.ta7weel.Session.format_decimals;
 
 /**
  * Created by mac on 3/18/17.
@@ -89,6 +93,7 @@ public class HomeFragment extends Fragment {
     TextView local_currency_txt;
     TextView local_currency_symbol;
     TextView local_currency_name;
+    TextView last_update;
 
     String current_rate;
     Rates current_item;
@@ -98,6 +103,8 @@ public class HomeFragment extends Fragment {
     JSONArray jsonArray;
 
     FragmentTouchListner mCallBack;
+
+    Float user_value = 1.00f;
 
     private RecyclerViewMoveItemCallback recyclerViewMoveCallback;
     private RecyclerViewInsertItemCallback recyclerViewInsertCallback;
@@ -177,6 +184,8 @@ public class HomeFragment extends Fragment {
         local_currency_txt = (TextView) view.findViewById(R.id.local_currency_txt);
         local_currency_symbol = (TextView) view.findViewById(R.id.currency_symbol);
         local_currency_name = (TextView) view.findViewById(R.id.currency_name);
+        last_update = (TextView) view.findViewById(R.id.last_update_time);
+
         current_rate = "1.00";
 
 
@@ -184,7 +193,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //show_alert_edit(jsonArray);
-                getdata();
+                //getdata();
             }
         });
 
@@ -192,7 +201,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                // show_alert_edit(jsonArray);
-                getdata();
+               // getdata();
 
             }
         });
@@ -250,6 +259,7 @@ public class HomeFragment extends Fragment {
                     is_open=false;
                     first_open=false;
                     currency_value.setBackgroundColor(Color.TRANSPARENT);
+                    calculate();
                 }
                 else {
                     //toolbarPanelLayout.openPanel();
@@ -265,16 +275,16 @@ public class HomeFragment extends Fragment {
         });
 
         currency_value = (TextView) view.findViewById(R.id.currency_value);
-        currency_value.setText("1");
+        currency_value.setText("1.0000");
         currency_value.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int[] pos = {0,0};
+                //int[] pos = {0,0};
 
-                currency_value.getLocationOnScreen(pos);
-                Log.e("pos",pos[0] + " " + pos[1]);
+                //currency_value.getLocationOnScreen(pos);
+                //Log.e("pos",pos[0] + " " + pos[1]);
 
-                showSortPopup(getActivity(),new Point(pos[0],pos[1]));
+                //showSortPopup(getActivity(),new Point(pos[0],pos[1]));
             }
         });
 
@@ -462,7 +472,19 @@ public class HomeFragment extends Fragment {
 
         ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
         ith.attachToRecyclerView(recyclerView);
-        getallcurrencies();
+
+
+        getallcurrencies(1.00f,false);
+
+        last_update.setText( "Last update at " + Session.getlastupdate(getActivity()));
+
+
+        panel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_calculator.performClick();
+            }
+        });
 
         return view;
     }
@@ -601,9 +623,10 @@ public class HomeFragment extends Fragment {
                 // Parse the jsResult object to a String
                 final String result = (String) Context.jsToJava(((NativeObject)jsResult).get("foo", (NativeObject)jsResult), String.class);
                 Log.e("res",result);
-                currency_value.setText(result);
+                currency_value.setText(format_decimals(Float.valueOf(result)));
                 previous_symbol="";
                 prepare_rates_dynamic(Float.valueOf(result));
+                user_value = Float.valueOf(result);
 
             }
         } finally {
@@ -642,7 +665,7 @@ public class HomeFragment extends Fragment {
         value_egp = user_entered_value*rate_egp;
 
 
-            rates.add(new Rates(R.drawable.ic_flag_canada,"1 USD = "+rate_cad+" CAD","$ "+format_decimals(value_cad),"Candian Dollar","CAD"));
+            rates.add(new Rates(R.drawable.ic_flag_canada,"1 USD = "+rate_cad+" CAD","$ "+ format_decimals(value_cad),"Candian Dollar","CAD"));
             rates.add(new Rates(R.drawable.ic_flag_europe,"1 USD = "+rate_eur+" EUR","$ "+format_decimals(value_eur),"EUR","EUR"));
             rates.add(new Rates(R.drawable.ic_flag_japan,"1 USD = "+ rate_jpy+" JPY","$ "+format_decimals(value_jpy),"JPY","YEN"));
             rates.add(new Rates(R.drawable.ic_flag_skw,"1 USD = "+ rate_skw+" SKW","$ "+format_decimals(value_skw),"SKW","SKW"));
@@ -653,11 +676,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private String format_decimals(Float value){
 
-       return String.format(Locale.ENGLISH,"%.4f",value);
-
-    }
 
     CategoryAdapter categoryAdapter;
     ArrayList<Rates> categories;
@@ -775,7 +794,7 @@ public class HomeFragment extends Fragment {
         mCallBack.show_progress();
 
         Ion.with(getActivity())
-                .load("http://mamacgroup.com/ta7weel/api/currency.php")
+                .load(Session.SERVER_URL+"currency.php")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
@@ -794,62 +813,48 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getallcurrencies(){
+    private void getallcurrencies(Float user_enterd_value,boolean update){
 
-        mCallBack.show_progress();
-        Ion.with(getActivity())
-                .load("http://mamacgroup.com/ta7weel/api/currency.php")
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        // do stuff with the result or error
-                        mCallBack.hide_progress();
-                        if(e==null) {
-                            rates.clear();
-                            Log.e("response", result.toString());
-                            for(int i=0;i<result.size();i++){
+        JsonArray result = AppController.getInstance().rates;
 
-                                Rates temp = new Rates(result.get(i).getAsJsonObject());
+        if(rates!=null)
+        {
+            rates.clear();
+            Log.e("response", result.toString());
+            for(int i=0;i<result.size();i++){
 
-                                if(current_item==null) {
+                Rates temp = new Rates(result.get(i).getAsJsonObject());
 
-                                    if (!Session.getCurrencyID(getActivity()).equals("-1")) {
+                if(AppController.getInstance().selected_channels.contains(temp.short_name))
 
-                                        if (temp.id.equals(Session.getCurrencyID(getActivity()))) {
-                                            current_item = temp;
-                                            rates.add(0,temp);
-                                        }else{
-                                            rates.add(temp);
-                                        }
-                                    } else {
-
-                                        if (temp.short_name.equals("USD")) {
-                                            current_item = temp;
-                                            rates.add(0,temp);
-                                        }else{
-                                            rates.add(temp);
-                                        }
-                                    }
-
-
-                                }else{
-                                    rates.add(temp);
-                                }
-
-
-                                //else
-
-                            }
-                            set_current_item(current_item);
-                           // ratesAdapter.notifyDataSetChanged();
-                            prepare_rates_dynamic(1.0f);
-
+                    if(current_item==null) {
+                        Log.e(temp.short_name,Session.getCurrencyID(getActivity()));
+                        if (temp.short_name.equals(Session.getCurrencyID(getActivity()))) {
+                            current_item = temp;
+                            rates.add(0,temp);
+                        }else{
+                            rates.add(temp);
                         }
+                }else {
+
+                        if(current_item.short_name.equals(temp.short_name))
+                            rates.add(0,temp);
+
                         else
-                            Log.e("error",e.getLocalizedMessage());
+                            rates.add(temp);
                     }
-                });
+
+
+            }
+
+            if(current_item==null)
+                current_item=rates.get(0);
+
+            set_current_item(current_item,update);
+           // ratesAdapter.notifyDataSetChanged();
+            prepare_rates_dynamic(user_enterd_value);
+
+        }
 
 
     }
@@ -905,8 +910,10 @@ public class HomeFragment extends Fragment {
                 local_currency_symbol.setText(current_item.symbol);
                 local_currency_name.setText(current_item.long_name);
                 currency_value.setText(current_item.value);
-                current_rate=current_item.base_rate;
+                user_value = Float.parseFloat(current_item.value);
 
+                current_rate=current_item.base_rate;
+                ratesAdapter.notifyDataSetChanged();
 
             }
         };
@@ -920,14 +927,20 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public   void set_current_item(Rates rate){
+    public   void set_current_item(Rates rate,boolean update){
 
         Picasso.with(getActivity()).load(current_item.image).into(local_currency_img);
         local_currency_txt.setText(current_item.short_name);
         local_currency_symbol.setText(current_item.symbol);
         local_currency_name.setText(current_item.long_name);
-        currency_value.setText(current_item.value);
+
+           if(!update)
+           currency_value.setText(current_item.value);
+
+        user_value = Float.parseFloat(current_item.value);
         current_rate=current_item.base_rate;
+
+
 
 
     }
@@ -1010,5 +1023,19 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
+
+    public void refresh_rates(){
+
+        Log.e("user_value",String.valueOf(user_value));
+
+        last_update.setText("Last update at "+ Session.getCurrentTimeStamp());
+
+
+        getallcurrencies(user_value,true);
+
+    }
+
+
 
 }

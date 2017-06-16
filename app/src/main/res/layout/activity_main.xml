@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    android:id="@+id/CoordinatorLayout01"
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:id="@+id/CoordinatorLayout01"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,9 +17,16 @@
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="android.support.v4.view.ViewPager"
+        class="com.mamac.ta7weel.NonSwipeableViewPager"
         android:id="@+id/viewPager"
         android:layout_marginBottom="50dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout">
+
+    </FrameLayout>
 
     <it.sephiroth.android.library.bottomnavigation.BottomNavigation
         android:id="@+id/BottomNavigation"
@@ -39,9 +52,87 @@
             android:layout_height="100dp"
             app:dots_radius="30dp"
             app:dots_color="@android:color/holo_red_dark"
-            android:layout_centerInParent="true"
             android:id="@+id/progress_view"
             android:background="@drawable/progress_rounded_corners" />
     </LinearLayout>
 
 </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/currency_bg"
+                android:id="@+id/imageView7"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FA696969">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:id="@+id/menu_list" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="60dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_fb_footer"
+                        android:id="@+id/imageView3"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_twitter_footer"
+                        android:id="@+id/imageView5"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_instagram_footer"
+                        android:id="@+id/imageView6"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>

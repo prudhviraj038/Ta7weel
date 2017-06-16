@@ -64,6 +64,17 @@
                 android:adjustViewBounds="true"
                 android:padding="2dp" />
 
+            <TextView
+                android:text="English"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/language_change"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/app_rounded_corners" />
+
         </LinearLayout>
 
     </RelativeLayout>

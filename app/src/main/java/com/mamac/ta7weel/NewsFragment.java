@@ -64,10 +64,11 @@ ArrayList<News> news;
     LinearLayout progress_holder;
 
 
-    private void get_news(){
+    public void get_news(){
 
+        news.clear();
 
-        String url = "http://ta7weel.net/api/news.php?lang=en";
+        String url = Session.SERVER_URL+"news.php?lang="+Session.getLan(getActivity());
         show_progress();
         Ion.with(getActivity())
                 .load(url)
@@ -87,10 +88,11 @@ ArrayList<News> news;
                                 if(!temp.id.equals("0"))
                                 news.add(temp);
 
-                                Log.e("error","error");
+                               // Log.e("error","error");
 
                             }
                             adapter.notifyDataSetChanged();
+                            recyclerView.scrollToPosition(0);
 
                         }else{
                             e.printStackTrace();

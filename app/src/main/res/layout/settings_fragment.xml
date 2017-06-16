@@ -226,7 +226,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/settings_item_color"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:id="@+id/sett_whatsup_ll">
 
                 <ImageView
                     android:layout_height="30dp"
@@ -254,11 +255,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/settings_item_color"
                 android:gravity="center_vertical"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:id="@+id/sett_fb_ll">
 
                 <ImageView
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_fb_settings"
+                    android:src="@drawable/ic_fb_settings"
                     android:layout_width="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp" />
@@ -281,11 +283,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/settings_item_color"
                 android:gravity="center_vertical"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:id="@+id/sett_twitter_ll">
 
                 <ImageView
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_twitter_settings"
+                    android:src="@drawable/ic_twitter_settings"
                     android:layout_width="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp" />
@@ -308,11 +311,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/settings_item_color"
                 android:gravity="center_vertical"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:id="@+id/sett_insta_ll">
 
                 <ImageView
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_instagram_settings"
+                    android:src="@drawable/ic_instagram_settings"
                     android:layout_width="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp" />
@@ -335,11 +339,12 @@
                 android:layout_height="wrap_content"
                 android:background="@color/settings_item_color"
                 android:gravity="center_vertical"
-                android:layout_marginTop="1dp">
+                android:layout_marginTop="1dp"
+                android:id="@+id/sett_email_ll">
 
                 <ImageView
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_email_settings"
+                    android:src="@drawable/ic_email_settings"
                     android:layout_width="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp" />
@@ -363,11 +368,12 @@
                 android:background="@color/settings_item_color"
                 android:gravity="center_vertical"
                 android:layout_marginTop="1dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp"
+                android:id="@+id/sett_sms_ll">
 
                 <ImageView
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_sms_settings"
+                    android:src="@drawable/ic_sms_settings"
                     android:layout_width="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp" />
