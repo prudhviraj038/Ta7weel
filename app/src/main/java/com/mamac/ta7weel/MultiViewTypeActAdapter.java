@@ -43,6 +43,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MultiViewTypeActAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    MainActivity mainActivity;
     private ArrayList<News> dataSet;
     Context mContext;
     int total_types;
@@ -148,10 +149,11 @@ public class MultiViewTypeActAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
 
-    public MultiViewTypeActAdapter(ArrayList<News> data, Context context) {
+    public MultiViewTypeActAdapter(ArrayList<News> data, Context context,MainActivity mainActivity) {
         this.dataSet = data;
         this.mContext = context;
         total_types = dataSet.size();
+        this.mainActivity = mainActivity;
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -188,10 +190,13 @@ public class MultiViewTypeActAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
     private void go_to_news_detail(News news){
-        // mCallback.newsclicked(news);
+        if(news.link.startsWith("http"))
+        mainActivity.goto_news_detail(news);
     }
     private void go_to_chanel_detail(News news){
-        //mCallback.chanel_selected_clear(news.chanels);
+        if(news.link.startsWith("http"))
+            mainActivity.goto_news_detail(news);
+
     }
 
     @Override

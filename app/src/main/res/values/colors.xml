@@ -10,7 +10,9 @@
     <color name="settings_txt_color">#1d2264</color>
     <color name="settings_item_color">#ffffff</color>
     <color name="table_row">#fdfbf0</color>
-    <color name="calc_buttons">#eaeaea</color>
+    <color name="calc_buttons">#c9c9c9</color>
+    <color name="calc_txt_color">#FFFFFF</color>
+    <color name="calc_divider">#8e8e8e</color>
 
 
 </resources>

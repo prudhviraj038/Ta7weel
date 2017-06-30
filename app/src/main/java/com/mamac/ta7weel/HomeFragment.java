@@ -14,6 +14,7 @@ import android.support.v4.media.session.IMediaControllerCallback;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -94,6 +95,7 @@ public class HomeFragment extends Fragment {
     TextView local_currency_symbol;
     TextView local_currency_name;
     TextView last_update;
+    TextView shake_to_convert_text;
 
     String current_rate;
     Rates current_item;
@@ -105,6 +107,8 @@ public class HomeFragment extends Fragment {
     FragmentTouchListner mCallBack;
 
     Float user_value = 1.00f;
+
+
 
     private RecyclerViewMoveItemCallback recyclerViewMoveCallback;
     private RecyclerViewInsertItemCallback recyclerViewInsertCallback;
@@ -205,11 +209,14 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        shake_to_convert_text = (TextView) view.findViewById(R.id.shake_to_convert_text);
+
+
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         rates = new ArrayList<>();
         ratesAdapter = new RatesAdapter(rates,getActivity(),this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.getItemAnimator().setMoveDuration(1000);
@@ -267,6 +274,12 @@ public class HomeFragment extends Fragment {
                     is_open=true;
                     first_open=true;
                     currency_value.setBackgroundColor(Color.parseColor("#F2F2F2"));
+
+                    if(Session.get_shake_status(getActivity()))
+                        shake_to_convert_text.setText("Shake to convert");
+                    else
+                       shake_to_convert_text.setText("Shake to convert is disabled");
+
 
                 }
 
@@ -1036,6 +1049,14 @@ public class HomeFragment extends Fragment {
 
     }
 
+
+    public void device_shaked(){
+        if(panel.getVisibility()==View.VISIBLE){
+            calculate();
+            panel.setVisibility(View.GONE);
+
+        }
+    }
 
 
 }

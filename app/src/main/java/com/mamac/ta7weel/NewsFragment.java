@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 
 /**
@@ -29,6 +30,10 @@ import java.util.ArrayList;
 public class NewsFragment extends Fragment {
     RecyclerView recyclerView;
     MultiViewTypeActAdapter adapter;
+    int visibleItemCount,totalItemCount,firstVisibleItemIndex;
+    String last_loaded_id="0";
+    MainActivity mainActivity;
+
 
     public static NewsFragment newInstance(int someInt) {
         NewsFragment myFragment = new NewsFragment();
@@ -46,16 +51,64 @@ public class NewsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
+        mainActivity = (MainActivity) getActivity();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         news = new ArrayList<>();
-        adapter = new MultiViewTypeActAdapter(news,getActivity());
+        adapter = new MultiViewTypeActAdapter(news,getActivity(),mainActivity);
         recyclerView.setAdapter(adapter);
         progress_holder = (LinearLayout) view.findViewById(R.id.progress_holder);
         progress_holder.setVisibility(View.GONE);
 
-        get_news();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+
+                visibleItemCount = recyclerView.getChildCount();
+                totalItemCount = mLayoutManager.getItemCount();
+                firstVisibleItemIndex = mLayoutManager.findFirstVisibleItemPosition();
+
+
+                if (((totalItemCount) - visibleItemCount) <= firstVisibleItemIndex ) {
+                    // Loading NOT in progress and end of list has been reached
+                    // also triggered if not enough items to fill the screen
+                    // if you start loading
+
+
+                    Log.e("reached", "climax");
+
+                    if(!last_loaded_id.equals(news.get(news.size()-1).id)) {
+                        get_news(news.get(news.size() - 1).id);
+                        last_loaded_id = news.get(news.size() - 1).id;
+                    }
+
+                } else if (firstVisibleItemIndex == 0) {
+
+                    // top of list reached
+
+
+
+                }
+
+
+
+            }
+
+        });
+
+
+
+
+
+        get_news("0");
 
         return view;
     }
@@ -64,12 +117,25 @@ ArrayList<News> news;
     LinearLayout progress_holder;
 
 
-    public void get_news(){
+    public void get_news(String last_id){
 
-        news.clear();
+
 
         String url = Session.SERVER_URL+"news.php?lang="+Session.getLan(getActivity());
-        show_progress();
+
+        if(last_id.equals("0")){
+            last_id = "0" ;
+            show_progress();
+            news.clear();
+            adapter.notifyDataSetChanged();
+        }else{
+
+            url = url+"&last_id="+last_id;
+
+        }
+
+        Log.e("url",url);
+
         Ion.with(getActivity())
                 .load(url)
                 .asJsonArray()
@@ -92,7 +158,11 @@ ArrayList<News> news;
 
                             }
                             adapter.notifyDataSetChanged();
+
+                            if(last_loaded_id.equals("0"))
                             recyclerView.scrollToPosition(0);
+
+
 
                         }else{
                             e.printStackTrace();

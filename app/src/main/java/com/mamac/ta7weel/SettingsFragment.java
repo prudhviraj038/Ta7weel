@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.kyleduo.switchbutton.SwitchButton;
 
 /**
  * Created by mac on 3/18/17.
@@ -25,6 +27,8 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
     LinearLayout whatsup_ll,fb_ll,insta_ll,twitter_ll,email_ll,sms_ll;
     private SeekBar mSeekBar;
     private TextView refresh_time_txt;
+    SwitchButton sb_shake;
+    SwitchButton sb_notify;
 
 
     public static SettingsFragment newInstance(int someInt) {
@@ -45,10 +49,36 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
 
         
         View view = inflater.inflate(R.layout.settings_fragment, container, false);
+        refresh_time_txt = (TextView) view.findViewById(R.id.refresh_time_txt);
         getdata();
+
+
+        sb_shake = (SwitchButton) view.findViewById(R.id.sb_shake);
+        sb_notify = (SwitchButton) view.findViewById(R.id.sb_notify);
+
+        sb_shake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                sb_shake.setChecked(b);
+                Session.set_shake_status(getActivity(),b);
+            }
+        });
+
+        sb_notify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                sb_notify.setChecked(b);
+                Session.set_notify_status(getActivity(),b);
+            }
+        });
+
+        sb_shake.setChecked(Session.get_shake_status(getActivity()));
+        sb_notify.setChecked(Session.get_notify_status(getActivity()));
+
         mSeekBar = (SeekBar) view.findViewById(R.id.seekBar1);
         mSeekBar.setOnSeekBarChangeListener(this);
-        refresh_time_txt = (TextView) view.findViewById(R.id.refresh_time_txt);
+        mSeekBar.setProgress(Session.getRefreshTime(getActivity())-1);
+
 
         whatsup_ll=(LinearLayout)view.findViewById(R.id.sett_whatsup_ll);
         fb_ll=(LinearLayout)view.findViewById(R.id.sett_fb_ll);
@@ -182,7 +212,7 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        Session.setRefreshTime(getActivity(),String.valueOf(i));
+        Session.setRefreshTime(getActivity(),i+1);
         if(i<2)
             refresh_time_txt.setText(String.valueOf(i+1)+ " Minute");
         else

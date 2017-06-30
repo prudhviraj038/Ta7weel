@@ -3,6 +3,9 @@ package com.mamac.ta7weel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,12 +67,35 @@ public class ExchangeLocationsFragment extends Fragment {
             }
         });
 
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if(charSequence.length()==0){
+                    getLocations("");
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         getLocations("");
         return view;
     }
 
 
     private void getLocations(String search){
+        Log.e("el","calling");
+
         Ion.with(this)
                 .load(Session.SERVER_URL+"locations.php?search="+search)
                 .asJsonArray()

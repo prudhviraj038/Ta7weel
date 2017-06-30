@@ -8,57 +8,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<RelativeLayout
-    android:id="@+id/CoordinatorLayout01"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <view
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="com.mamac.ta7weel.NonSwipeableViewPager"
-        android:id="@+id/viewPager"
-        android:layout_marginBottom="50dp" />
-
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/mainView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/frame_layout">
+        android:layout_height="match_parent">
 
-    </FrameLayout>
 
-    <it.sephiroth.android.library.bottomnavigation.BottomNavigation
-        android:id="@+id/BottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bbn_entries="@menu/bottombar_menu_4items"
-        app:bbn_scrollEnabled="true"
-        app:bbn_badgeProvider="@string/bbn_badgeProvider"
-        app:layout_behavior="@string/bbn_phone_view_behavior"
-        android:layout_alignParentBottom="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/my_awesome_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:minHeight="?attr/actionBarSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EAEAEA"
+                android:orientation="vertical"></LinearLayout>
+
+            <view
+                android:id="@+id/viewPager"
+                class="com.mamac.ta7weel.NonSwipeableViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <it.sephiroth.android.library.bottomnavigation.BottomNavigation
+                android:id="@+id/BottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                app:bbn_badgeProvider="@string/bbn_badgeProvider"
+                app:bbn_entries="@menu/bottombar_menu_4items"
+                app:bbn_scrollEnabled="true"
+                app:layout_behavior="@string/bbn_phone_view_behavior" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/progress_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+            <com.singh.daman.proprogressviews.DottedArcProgress
+                android:id="@+id/progress_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/progress_rounded_corners"
+                app:dots_color="@android:color/holo_red_dark"
+                app:dots_radius="30dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingBottom="50dp"
-        android:id="@+id/progress_holder">
-
-        <com.singh.daman.proprogressviews.DottedArcProgress
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:dots_radius="30dp"
-            app:dots_color="@android:color/holo_red_dark"
-            android:id="@+id/progress_view"
-            android:background="@drawable/progress_rounded_corners" />
-    </LinearLayout>
-
-</RelativeLayout>
-
-    <LinearLayout
+        android:id="@+id/drawerView"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -70,65 +87,64 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/currency_bg"
-                android:id="@+id/imageView7"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/currency_bg" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FA696969">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <ListView
+                        android:id="@+id/menu_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:divider="@null"
-                        android:dividerHeight="0dp"
-                        android:id="@+id/menu_list" />
+                        android:dividerHeight="0dp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="60dp">
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_fb_footer"
                         android:id="@+id/imageView3"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true" />
-
-                    <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_twitter_footer"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_fb_footer" />
+
+                    <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true" />
-
-                    <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_instagram_footer"
-                        android:id="@+id/imageView6"
                         android:layout_weight="1"
-                        android:adjustViewBounds="true" />
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_twitter_footer" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_instagram_footer" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

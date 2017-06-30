@@ -24,11 +24,13 @@ public class Session {
     static String RATES="r_id";
     static String SETTINGS="s_id";
     static String PRICES="p_id";
-    static String Ref_Time="ref_time";
+    static String Ref_Time="new_ref_time";
     static String up_Time="ref_time";
     static String selected_currency="selected_currency";
 
 
+    static String sb_shake="sb_shake";
+    static String sb_notify="sb_notify";
 
 
     static String SERVER_URL = "http://ta7weel.net/api/";
@@ -109,16 +111,20 @@ public class Session {
     }
 
 
-    public static void setRefreshTime(Context context, String c_id) {
+    public static void setRefreshTime(Context context, int minutes) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Ref_Time, c_id);
+        editor.putInt(Ref_Time, minutes);
         editor.apply();
     }
 
-    public static String getRefreshTime(Context context){
+    public static int getRefreshTime(Context context){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString(Ref_Time, "-1");
+        try {
+            return sharedPreferences.getInt(Ref_Time, 1);
+        }catch (Exception ex){
+            return 1;
+        }
     }
 
     public static void setSettings(Context context, String about_us) {
@@ -181,5 +187,32 @@ public class Session {
         return String.format(Locale.ENGLISH,"%.4f",value);
 
     }
+
+
+    public static void set_shake_status(Context context, Boolean c_id) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(sb_shake, c_id);
+        editor.apply();
+    }
+
+    public static Boolean get_shake_status(Context context){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean(sb_shake, true);
+    }
+
+
+    public static void set_notify_status(Context context, Boolean c_id) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(sb_notify, c_id);
+        editor.apply();
+    }
+
+    public static Boolean get_notify_status(Context context){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean(sb_notify, true);
+    }
+
 
 }

@@ -13,6 +13,8 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
 
     NewsFragment newsFragment;
     HomeFragment homeFragment;
+    NewsWebFragmnet newsWebFragmnet;
+
 
 
     public TabsAdapter(FragmentManager fm) {
@@ -37,33 +39,40 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
 
         else if(position == 2){
 
-            newsFragment = NewsFragment.newInstance(position);
+               newsFragment = NewsFragment.newInstance(position);
 
             return newsFragment;
         }
 
+        else if(position == 3) {
 
+            newsWebFragmnet = NewsWebFragmnet.newInstance("News");
 
-        else if(position == 3)
-            return SettingsFragment.newInstance(position);
+            return newsWebFragmnet;
+        }
 
         else if(position == 4)
-            return GoldPricesFragmnet.newInstance("Gold Prices");
+            return SettingsFragment.newInstance(position);
 
         else if(position == 5)
-            return SilverPricesFragment.newInstance("Silver Prices");
+            return GoldPricesFragmnet.newInstance("Gold Prices");
 
         else if(position == 6)
-            return OilPricesFragment.newInstance("Oil Prices");
+            return SilverPricesFragment.newInstance("Silver Prices");
 
         else if(position == 7)
-            return ExchangeLocationsFragment.newInstance("Exchange Locations");
+            return OilPricesFragment.newInstance("Oil Prices");
 
         else if(position == 8)
-            return NewsCalendarFragment.newInstance("News Calender");
+            return ExchangeLocationsFragment.newInstance("Exchange Locations");
 
         else if(position == 9)
+            return NewsCalendarFragment.newInstance("News Calender");
+
+        else if(position == 10)
             return AddCurrenciesFragment.newInstance(position);
+
+
 
         else
             return DemoFragment.newInstance(position);
@@ -72,6 +81,6 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return 11;
     }
 }
