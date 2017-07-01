@@ -1,5 +1,6 @@
 package com.mamac.ta7weel;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -72,7 +73,11 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
         else if(position == 10)
             return AddCurrenciesFragment.newInstance(position);
 
+        else if (position == 11)
+            return ContactUsFragment.newInstance("Contact us");
 
+        else if (position == 12)
+            return AboutFragment.newInstance("About us");
 
         else
             return DemoFragment.newInstance(position);
@@ -81,6 +86,6 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 11;
+        return 13;
     }
 }

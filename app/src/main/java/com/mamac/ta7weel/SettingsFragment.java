@@ -24,11 +24,12 @@ import com.kyleduo.switchbutton.SwitchButton;
  */
 
 public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChangeListener{
-    LinearLayout whatsup_ll,fb_ll,insta_ll,twitter_ll,email_ll,sms_ll;
+    LinearLayout whatsup_ll,fb_ll,insta_ll,twitter_ll,email_ll,sms_ll,contact_us,about_us;
     private SeekBar mSeekBar;
     private TextView refresh_time_txt;
     SwitchButton sb_shake;
     SwitchButton sb_notify;
+    MainActivity mainActivity;
 
 
     public static SettingsFragment newInstance(int someInt) {
@@ -51,7 +52,7 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
         View view = inflater.inflate(R.layout.settings_fragment, container, false);
         refresh_time_txt = (TextView) view.findViewById(R.id.refresh_time_txt);
         getdata();
-
+        mainActivity = (MainActivity) getActivity();
 
         sb_shake = (SwitchButton) view.findViewById(R.id.sb_shake);
         sb_notify = (SwitchButton) view.findViewById(R.id.sb_notify);
@@ -86,6 +87,8 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
         insta_ll=(LinearLayout)view.findViewById(R.id.sett_insta_ll);
         email_ll=(LinearLayout)view.findViewById(R.id.sett_email_ll);
         sms_ll=(LinearLayout)view.findViewById(R.id.sett_sms_ll);
+        contact_us = (LinearLayout) view.findViewById(R.id.contact_us);
+        about_us = (LinearLayout) view.findViewById(R.id.about_us);
         whatsup_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +203,19 @@ public class SettingsFragment extends Fragment implements SeekBar.OnSeekBarChang
                 sendIntent.putExtra("sms_body", html2text(Session.getSettings(getActivity(),"playstore_link")));
                 sendIntent.setType("vnd.android-dir/mms-sms");
                 startActivity(sendIntent);
+            }
+        });
+        contact_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.go_to_contact_us();
+            }
+        });
+
+        about_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.goto_about_page();
             }
         });
 

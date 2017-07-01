@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
     TextView change_lan;
     ProgressBar mprogressBar;
     private ActionBarDrawerToggle mDrawerToggle;
+    boolean previous_page;
 
 
 
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
 
         menuItems.add(new MenuItem("Gold Prices","",R.drawable.ic_gold_prices));
         menuItems.add(new MenuItem("Silver Prices","",R.drawable.ic_silver_prices));
-        menuItems.add(new MenuItem("Oil Prices","",R.drawable.ic_oil_prices));
+        menuItems.add(new MenuItem("Oil Price","",R.drawable.ic_oil_prices));
         menuItems.add(new MenuItem("Exchange Locations","",R.drawable.ic_exchange_locations));
         menuItems.add(new MenuItem("News Calender","",R.drawable.ic_news_calender));
         menuItems.add(new MenuItem("Live Broadcast","",R.drawable.ic_live_broadcast));
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
                 mDrawerLayout.closeDrawer(GravityCompat.START,true);
 
                 Log.e("pos click",String.valueOf(i));
+            //    previous_page = mViewPager.getCurrentItem();
 
                 switch (i){
                     case 0:
@@ -318,8 +320,8 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
     @Override
     public void onMenuItemSelect(@IdRes int i, int i1, boolean b) {
 
-      //  Log.e("i",String.valueOf(i1));
-
+        Log.e("i",String.valueOf(i1));
+       // previous_page = mViewPager.getCurrentItem();
         if(i1==3)
             mViewPager.setCurrentItem(4);
         else
@@ -330,8 +332,16 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
 
     @Override
     public void onMenuItemReselect(@IdRes int i, int i1, boolean b) {
-       // Log.e("ir",String.valueOf(i1));
+     //   Log.e("previous",String.valueOf(previous_page));
+        if (i1 == 2 && !previous_page && mViewPager.getCurrentItem()!=3 ){
 
+            try {
+                tabsAdapter.newsFragment.get_news("0");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        previous_page = false;
 
 
     }
@@ -435,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
                 add_btn.setVisibility(View.INVISIBLE);
                 page_logo.setVisibility(View.INVISIBLE);
                 page_title.setVisibility(View.VISIBLE);
-                page_title.setText("Oil Prices");
+                page_title.setText("Oil Price");
 
 
                 break;
@@ -476,6 +486,22 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
 
                 break;
 
+            case 11:
+                page_logo.setVisibility(View.INVISIBLE);
+                page_title.setVisibility(View.VISIBLE);
+                page_title.setText("Contact us");
+                menu_btn.setVisibility(View.GONE);
+                back_btn.setVisibility(View.VISIBLE);
+                break;
+
+            case 12:
+                page_logo.setVisibility(View.INVISIBLE);
+                page_title.setVisibility(View.VISIBLE);
+                page_title.setText("About us");
+                menu_btn.setVisibility(View.GONE);
+                back_btn.setVisibility(View.VISIBLE);
+                break;
+
 
 
             default:
@@ -487,12 +513,18 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
     @Override
     public void onBackPressed() {
         // your code.
+        previous_page=false;
             if(mDrawerLayout.isDrawerOpen(GravityCompat.START))
                 mDrawerLayout.closeDrawer(GravityCompat.START,true);
             else  if(mViewPager.getCurrentItem()!=0){
 
-                if(mViewPager.getCurrentItem()==3)
-                    mViewPager.setCurrentItem(2,true);
+                if(mViewPager.getCurrentItem()==3) {
+                    previous_page=true;
+                    mViewPager.setCurrentItem(2, true);
+                }
+
+                else  if (mViewPager.getCurrentItem() ==11 || mViewPager.getCurrentItem() == 12)
+                    mViewPager.setCurrentItem(4,true);
                 else
                 mViewPager.setCurrentItem(0,false);
             }
@@ -590,6 +622,14 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
         if(tabsAdapter.newsWebFragmnet!=null){
             tabsAdapter.newsWebFragmnet.load_url(news);
         }
+    }
+
+    public void go_to_contact_us(){
+        mViewPager.setCurrentItem(11);
+    }
+
+    public void goto_about_page(){
+        mViewPager.setCurrentItem(12);
     }
 
 

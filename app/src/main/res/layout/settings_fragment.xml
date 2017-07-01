@@ -162,64 +162,67 @@
 
             </LinearLayout>
 
-            <TextView
-                android:text="Ta7weel App"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                android:textColor="@color/settings_txt_color" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/settings_item_color">
-
                 <TextView
-                    android:text="Contact us"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/settings_txt_color" />
+                    android:text="ta7weel App"
+                    android:textColor="@color/settings_txt_color"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/contact_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/settings_item_color"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:text="Contact us"
+                        android:textColor="@color/settings_txt_color"
+                        android:textSize="16sp" />
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/settings_item_color"
-                android:layout_marginTop="1dp">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/settings_item_color"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:text="About us"
+                        android:textColor="@color/settings_txt_color"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
 
                 <TextView
-                    android:text="About us"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/settings_txt_color" />
-
-
-            </LinearLayout>
-
-
-            <TextView
-                android:text="Share Ta7weel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                android:textColor="@color/settings_txt_color" />
+                    android:text="Share ta7weel "
+                    android:textColor="@color/settings_txt_color"
+                    android:textSize="16sp" />
 
             <LinearLayout
                 android:orientation="horizontal"
